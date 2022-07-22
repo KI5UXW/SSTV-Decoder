@@ -70,7 +70,7 @@ def separateSegments():
     sound_file_Value = np.array(sound_file.get_array_of_samples())
     # milliseconds in the sound track
     # * 4.88
-    ranges = [(0,1905600),(1905600,3725800),(3725800,5594800),(5594800,7400400),(7400400,9206000)]
+    ranges = [(0,2005600),(2005600,3825800),(3825800,5694800),(5694800,7500400),(7500400,9306000)]
 
     #print(str(ranges))
 

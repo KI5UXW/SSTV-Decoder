@@ -14,5 +14,3 @@ for x, y in ranges:
     new_file=sound_file_Value[x : y]
     song = pydub.AudioSegment(new_file.tobytes(), frame_rate=sound_file.frame_rate,sample_width=sound_file.sample_width,channels=1)
     song.export("AMEA_Transmission_" + str(x) + "-" + str(y) +".wav", format="wav")
-
-winsound.PlaySound("AME", winsound.SND_FILENAME)

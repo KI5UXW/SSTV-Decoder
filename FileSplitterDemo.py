@@ -6,7 +6,7 @@ sound_file = pydub.AudioSegment.from_wav("SSTV-Complete-Transmission.wav")
 sound_file_Value = np.array(sound_file.get_array_of_samples())
 # milliseconds in the sound track
 # * 4.88
-ranges = [(0,1805600),(1805600,3625800),(3625800,5394800),(5394800,7200400),(7200400,9006000)]
+ranges = [(0,1805600),(1805600,3625800),(3625800,5494800),(5494800,7300400),(7300400,9106000)]
 
 print(str(ranges))
 

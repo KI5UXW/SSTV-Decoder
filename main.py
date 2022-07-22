@@ -3,6 +3,7 @@
 import os
 import sounddevice as sd
 from scipy.io.wavfile import write
+import pydub
 import numpy as np
 noiseList = []
 currentNoiseLevel = 0
@@ -11,7 +12,7 @@ currentNoiseLevel = 0
 def sampleNoiseLevel():
     #Get Noise Level
 
-    duration = 2 #in seconds
+    duration = 5 #in seconds
 
     def audio_callback(indata, frames, time, status):
         volume_norm = np.linalg.norm(indata) * 20
@@ -65,16 +66,26 @@ def recordSegments():
     write('RecordedAudio.wav', fs, myrecording)  # Save as WAV file 
 
 def separateSegments():
-    pass
+    sound_file = pydub.AudioSegment.from_wav("SSTV-Complete-Transmission.wav")
+    sound_file_Value = np.array(sound_file.get_array_of_samples())
+    # milliseconds in the sound track
+    # * 4.88
+    ranges = [(0,1905600),(1905600,3725800),(3725800,5594800),(5594800,7400400),(7400400,9206000)]
+
+    #print(str(ranges))
+
+    for x, y in ranges:
+        new_file=sound_file_Value[x : y]
+        song = pydub.AudioSegment(new_file.tobytes(), frame_rate=sound_file.frame_rate,sample_width=sound_file.sample_width,channels=1)
+        song.export("AMEA_Transmission_" + str(x) + "-" + str(y) +".wav", format="wav")
 
 def processSegments():
-    #Convert .wav files to .png files.
-    pass
+    os.system('''cmd /k "sstv -d AMEA_Transmission_0-1805600.wav -o AMEA_Data_Result_0-1805600.png"''')
 
 #os.system('cmd /k "sstv -d NASASEES.wav -o result.png"')
 
-ambientNoise = int(sampleNoiseLevel())
-monitorForIncrease(ambientNoise)
+#ambientNoise = int(sampleNoiseLevel())
+#monitorForIncrease(ambientNoise)
 #recordSegments()
-#separateSegments()
-#processSegments()
+separateSegments()
+processSegments()

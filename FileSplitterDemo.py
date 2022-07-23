@@ -21,7 +21,7 @@ chunks = split_on_silence (
     min_silence_len = 250,
     # Consider a chunk silent if it's quieter than -16 dBFS.
     # (You may want to adjust this parameter.)
-    silence_thresh = -36
+    silence_thresh = -50
 )
 
 # Process each chunk with your parameters
@@ -36,9 +36,9 @@ for i, chunk in enumerate(chunks):
     #normalized_chunk = match_target_amplitude(audio_chunk, -10.0)
 
     # Export the audio chunk with new bitrate.
-    print("Exporting chunk{0}.wav.".format(i))
+    print("Exporting AMEA_Transmission{0}.wav.".format(i))
     audio_chunk.export(
-        ".//chunk{0}.wav".format(i),
+        ".//AMEA_Transmission{0}.wav".format(i),
         bitrate = "192k",
         format = "wav"
     )

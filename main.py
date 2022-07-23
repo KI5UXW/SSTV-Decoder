@@ -47,13 +47,13 @@ def recordSegments():
     #Currently: 1 SSTV Picture, 5 Color Pictures per Data Transmission.
     #Approximately a 3' 12" long transmission for current length.
     fs = 44100  # Sample rate
-    seconds = (3*60) + 53 # Duration of recording
+    seconds = (4*60)
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
     sd.wait()  # Wait until recording is finished
     write('RecordedAudio.wav', fs, myrecording)  # Save as WAV file 
 
 def separateSegments():
-    song = AudioSegment.from_mp3("SSTV-Complete-Transmission.wav")
+    song = AudioSegment.from_mp3("RecordedAudio.wav")
 
     # Split track where the silence is 2 seconds or more and get chunks using 
     # the imported function.

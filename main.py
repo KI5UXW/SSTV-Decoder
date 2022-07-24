@@ -8,8 +8,14 @@ import numpy as np
 import time
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+import datetime
+from datetime import date
+from datetime import datetime
 noiseList = []
 currentNoiseLevel = 0
+today = date.today()
+now = datetime.now()
+now = now.hour
 
 
 def sampleNoiseLevel():
@@ -50,10 +56,10 @@ def recordSegments():
     seconds = (4*60)
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
     sd.wait()  # Wait until recording is finished
-    write('RecordedAudio.wav', fs, myrecording)  # Save as WAV file 
+    write('SSTV-Complete-Transmission.wav', fs, myrecording)  # Save as WAV file 
 
 def separateSegments():
-    song = AudioSegment.from_mp3("RecordedAudio.wav")
+    song = AudioSegment.from_mp3("SSTV-Complete-Transmission.wav")
 
     # Split track where the silence is 2 seconds or more and get chunks using 
     # the imported function.
@@ -88,12 +94,12 @@ def separateSegments():
 
 
 def processSegments():
-    os.system("sstv -d AMEA_Transmission_0.wav -o AMEA_Data_Result_SSTV_Picture.png")
-    os.system("sstv -d AMEA_Transmission_1.wav -o AMEA_Data_1_Digit_1.png")
-    os.system("sstv -d AMEA_Transmission_2.wav -o AMEA_Data_1_Digit_2.png")
-    os.system("sstv -d AMEA_Transmission_3.wav -o AMEA_Data_1_Digit_3.png")
-    os.system("sstv -d AMEA_Transmission_4.wav -o AMEA_Data_1_Digit_4.png")
-    os.system("sstv -d AMEA_Transmission_5.wav -o AMEA_Data_1_Digit_5.png")
+    os.system("sstv -d AMEA_Transmission_0.wav -o AMEA_Data_Result_SSTV_Picture_"+str(today)+"_Hour-"+str(now)+".png")
+    os.system("sstv -d AMEA_Transmission_1.wav -o AMEA_Data_1_Digit_1_"+str(today)+"_Hour-"+str(now)+".png")
+    os.system("sstv -d AMEA_Transmission_2.wav -o AMEA_Data_1_Digit_2_"+str(today)+"_Hour-"+str(now)+".png")
+    os.system("sstv -d AMEA_Transmission_3.wav -o AMEA_Data_1_Digit_3_"+str(today)+"_Hour-"+str(now)+".png")
+    os.system("sstv -d AMEA_Transmission_4.wav -o AMEA_Data_1_Digit_4_"+str(today)+"_Hour-"+str(now)+".png")
+    os.system("sstv -d AMEA_Transmission_5.wav -o AMEA_Data_1_Digit_5_"+str(today)+"_Hour-"+str(now)+".png")
 
 #ambientNoise = int(sampleNoiseLevel())
 #monitorForIncrease(ambientNoise)

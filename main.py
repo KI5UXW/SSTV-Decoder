@@ -103,6 +103,6 @@ def processSegments():
 
 #ambientNoise = int(sampleNoiseLevel())
 #monitorForIncrease(ambientNoise)
-#recordSegments()
+recordSegments()
 separateSegments()
 processSegments()

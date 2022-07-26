@@ -56,10 +56,10 @@ def recordSegments():
     seconds = (4*60)
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
     sd.wait()  # Wait until recording is finished
-    write('DataDemo3.wav', fs, myrecording)  # Save as WAV file 
+    write('DataDemo1.wav', fs, myrecording)  # Save as WAV file 
 
 def separateSegments():
-    song = AudioSegment.from_mp3("DataDemo3.wav")
+    song = AudioSegment.from_mp3("DataDemo1.wav")
 
     # Split track where the silence is 2 seconds or more and get chunks using 
     # the imported function.

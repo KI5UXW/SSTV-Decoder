@@ -49,11 +49,10 @@ def monitorForIncrease(averageNoise):
     pass
 
 def recordSegments():
-    #36 Second Transmissions, 0.25 Second break in-between.
+    #37 Second Transmissions, 0.25 Second break in-between.
     #Currently: 1 SSTV Picture, 5 Color Pictures per Data Transmission.
-    #Approximately a 3' 12" long transmission for current length.
     fs = 44100  # Sample rate
-    seconds = (4*60)
+    seconds = (4*61)
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
     sd.wait()  # Wait until recording is finished
     write('RecordedAudio.wav', fs, myrecording)  # Save as WAV file 
